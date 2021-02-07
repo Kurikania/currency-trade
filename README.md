@@ -1,5 +1,7 @@
 # novotorica
 
+![Alt text](./Screenshot.png?raw=true "Title")
+
 ## Project setup
 ```
 npm install
