@@ -12,7 +12,7 @@
         <td>{{ cur.Nominal }}</td>
         <td :class="{is_growing: (cur.Value - cur.Previous).toFixed(1) > 0 , is_decreasing:(cur.Value - cur.Previous).toFixed(1) < 0}">
           {{ cur.Value }}
-          <span  v-if="(cur.Value - cur.Previous).toFixed(1) != 0">
+          <span>
               ({{ (cur.Value - cur.Previous).toFixed(1) }})
           </span>
         </td>
