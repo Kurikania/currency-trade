@@ -49,7 +49,7 @@ export default {
     },
     is_avalibale() {
       if (this.goal_currency) {
-      return (this.mymoney.Value / this.goal_currency.Nominal / this.goal_currency.Value).toFixed(2) + " " + this.goal_currency.CharCode;
+      return (this.mymoney.Value / (1 /this.goal_currency.Nominal * this.goal_currency.Value)).toFixed(2) + " " + this.goal_currency.CharCode;
       } else {
          return 0
       }
@@ -69,6 +69,7 @@ export default {
       }
     },
     sell() {
+      console.log(this.operations[this.goal_currency.CharCode].amount <= this.exchange)
       if(this.operations[this.goal_currency.CharCode].amount <= this.exchange) {
         this.$store.dispatch("sell",  {...this.goal_currency, amount: this.exchange} );
         this.money = 0

@@ -11,6 +11,14 @@ export default new Vuex.Store({
     goal_currency: null,
   },
   mutations: {
+    saveLocal(state) {
+      localStorage.setItem('state',  JSON.stringify(state))
+    },
+    loadLocal(state) {
+      let data =  JSON.parse(localStorage.getItem('state'))
+      state.operations = data.operations
+      state.my_money = data.my_money
+    },
     ADD_DATA(state, data) {
       let val = data.Valute;
       for (var prop in val) {
@@ -18,7 +26,6 @@ export default new Vuex.Store({
       }
     },
     SET_CURRENCY(state, data) {
-      console.log(data);
       state.goal_currency = data;
     },
     BUY(state, data) {
@@ -31,11 +38,10 @@ export default new Vuex.Store({
       }
     },
     SELL(state, data) {
-      console.log(data.amount)
       state.my_money.Value = state.my_money.Value + data.amount;
-      //if (state.operations[data.CharCode] === undefined) state.operations[data.CharCode] = data.amount
       state.operations[data.CharCode].amount -= data.amount;
-      if(state.operations[data.CharCode].amount === 0) {
+      console.log(state.operations[data.CharCode].amount)
+      if(state.operations[data.CharCode].amount <= 0) {
         delete state.operations[data.CharCode]
       }
     },
@@ -48,15 +54,19 @@ export default new Vuex.Store({
           commit("ADD_DATA", data);
         });
     },
+    loadLocal({ commit }){
+      commit('loadLocal')
+    },
     set_goal_currency({ commit }, data) {
-      console.log(data);
       commit("SET_CURRENCY", data);
     },
     buy({ commit }, data) {
       commit("BUY", data);
+      commit('saveLocal', data)
     },
     sell({ commit }, data) {
       commit("SELL", data);
+      commit('saveLocal', data)
     },
   },
   modules: {},
