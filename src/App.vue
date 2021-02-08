@@ -8,7 +8,7 @@
         <div class="separated"> <div>{{ my_money.CharCode }}</div> <div>{{ my_money.Value.toFixed(2) }}</div></div>
         <div v-for="(val, name) in operations" :key="name" class="separated">
           <div>{{ name }}</div>
-          <div>{{ val.amount.toFixed(4) }}</div>
+          <div>{{ val.amount }}</div>
         </div>
       </div>
     </div>

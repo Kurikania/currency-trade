@@ -30,7 +30,7 @@ export default new Vuex.Store({
     },
     BUY(state, data) {
       console.log(data.amount)
-      state.my_money.Value = state.my_money.Value - data.amount;
+      state.my_money.Value = state.my_money.Value - data.amount * state.goal_currency.Value;
       if (state.operations[data.CharCode] === undefined) {
         state.operations[data.CharCode] = data;
       } else {

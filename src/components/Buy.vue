@@ -64,16 +64,14 @@ export default {
   methods: {
     buy() {
       if(this.mymoney.Value >= this.exchange) {       
-        this.$store.dispatch("buy", {...this.goal_currency, amount: this.exchange});
+        this.$store.dispatch("buy", {...this.goal_currency, amount: this.money});
         this.money = 0
       }
     },
     sell() {
       console.log(this.operations[this.goal_currency.CharCode].amount <= this.exchange)
-      if(this.operations[this.goal_currency.CharCode].amount <= this.exchange) {
         this.$store.dispatch("sell",  {...this.goal_currency, amount: this.exchange} );
         this.money = 0
-      }
     }
   }
 };
